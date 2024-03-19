@@ -12,7 +12,7 @@ Run `npx nx dev frontend` to start the development server/frontend
 
 Run `npx nx serve backend` to start the development server/backend
 
-Run `npx nx run-many --parallel -t dev serve -p frontend backendnpx nx serve backend` to start the development server/backend and development server/frontend paralell
+Run `npx nx run-many --parallel -t dev serve -p frontend backendnpx nx serve backend` to start the development server/backend and development server/frontend parallel
 
 ## Build for production
 
