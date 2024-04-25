@@ -1,0 +1,17 @@
+Backend: 
+ 1. - Authentication/register (DONE)
+ 2. - User roles (50/50)
+ 3. - Get data about user (DONE)
+ 4. - Modify data about user (50/50)
+
+ 6. - Ban user (DONE)
+ 7. - Verify unique id to pass 
+ ---Add (Must, but not important)---
+ 5. - Verify user (AI verify, temporary empty)
+ 8. - make a report (day/week/month/year)
+ 9. - make backup database
+ 10. - send a report to another server
+
+ Aditional later(
+    1. - Unban user
+ )
