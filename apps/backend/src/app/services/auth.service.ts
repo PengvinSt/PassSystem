@@ -27,7 +27,7 @@ export class AuthService {
             message: err,
           };
         }
-    
+
         return {...status, ...user};
       }
 
@@ -40,7 +40,7 @@ export class AuthService {
           let user: UserDto;
         try {
             user = await this.userService.loginByLogin(loginUserDto);
-            
+
             const token = this._createToken(user);
             user.token = {
               accessToken: token.accessToken,
@@ -56,19 +56,20 @@ export class AuthService {
         return {...status, ...user};
       }
 
-      async validateUser(payload: { uuid:string }): Promise<UserDto> { 
-        const user = await this.userService.findOne(payload);
+      async validateUser(payload: { uuid:string }): Promise<UserDto> {
+        const options = { uuid: payload.uuid}
+        const user = await this.userService.findOne(options);
         if (!user) {
           throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
         }
         return user;
       }
 
-      private _createToken({ login }: UserDto): ITokens {
+      private _createToken(userDto: UserDto): ITokens {
         const expiresIn = process.env.EXPIRESIN + '';
-        const user = { username:login.username };
-        const accessToken = this.jwtService.sign(user); 
-    
+        const user = { uuid:userDto.uuid };
+        const accessToken = this.jwtService.sign(user);
+
         return {
           expiresIn,
           accessToken,

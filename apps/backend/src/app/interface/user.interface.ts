@@ -5,6 +5,7 @@ export default interface IUser {
         first:string,
         last:string,
     },
+    isOnline:boolean,
     gender:string,
     email:string,
     picture: string,
@@ -32,7 +33,7 @@ export default interface IUser {
             date:string,
             hours: {
                 startHour:string,
-                endHour:string, 
+                endHour:string,
                 full:number
             }
         }[]

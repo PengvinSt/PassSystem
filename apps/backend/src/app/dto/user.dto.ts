@@ -13,6 +13,9 @@ export class UserDto implements IUser{
     role : string
 
     @IsNotEmpty()
+    isOnline: boolean
+
+    @IsNotEmpty()
     uuid : string
 
     @IsNotEmpty()
@@ -24,7 +27,7 @@ export class UserDto implements IUser{
 
     @IsNotEmpty()
     picture: string;
- 
+
     @IsNotEmpty()
     login: LoginObjectType
 
@@ -67,6 +70,10 @@ export class UserInputDto implements IUser{
 
     @Field()
     @IsNotEmpty()
+    isOnline: boolean
+
+    @Field()
+    @IsNotEmpty()
     role : string
 
     @IsNotEmpty()
@@ -81,7 +88,7 @@ export class UserInputDto implements IUser{
     @IsNotEmpty()
     @Field()
     picture: string;
- 
+
     @IsNotEmpty()
     @Field()
     login: LoginInputType
@@ -132,6 +139,10 @@ export class UserOutputDto implements IUser{
 
     @Field()
     @IsNotEmpty()
+    isOnline: boolean
+
+    @Field()
+    @IsNotEmpty()
     uuid : string
 
     @IsNotEmpty()
@@ -146,7 +157,7 @@ export class UserOutputDto implements IUser{
     @IsNotEmpty()
     @Field()
     picture: string;
- 
+
     @IsNotEmpty()
     @Field()
     login: LoginObjectType

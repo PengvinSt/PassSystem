@@ -44,7 +44,7 @@ export class UserService {
         }
         const savedUser = await this.userModel.findOneAndUpdate({uuid:user.uuid}, newUser, {new: true}).exec()
         return  PrettyDto.prettyUserDto(savedUser);
-    } 
+    }
 
     async createUser(user:UserDto):Promise<UserDto>{
         const candidate = await this.userModel.findOne({ email: user.email });
@@ -53,7 +53,7 @@ export class UserService {
             throw new HttpException('User already exists(Email error)', HttpStatus.BAD_REQUEST);
         }
 
-        const salt = await genSalt(10); 
+        const salt = await genSalt(10);
 
         const hashPassword = await hash(user.login.password, salt);
 
@@ -76,8 +76,11 @@ export class UserService {
         if (!candidate) {
             throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
+        if (candidate.ban !== undefined && candidate.ban.isBaned === true) {
+          throw new HttpException('User is banned!', HttpStatus.FORBIDDEN);
+        }
         const areEqual = await compare(password, candidate.login.password);
-        if(!areEqual) { 
+        if(!areEqual) {
             throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
         }
 

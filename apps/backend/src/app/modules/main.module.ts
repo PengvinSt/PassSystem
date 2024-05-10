@@ -5,7 +5,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { getMongoConfig } from '../../config/db-connect.config';
 import { AuthModule } from './auth.module';
-
+//import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 
 
@@ -16,7 +17,7 @@ import { AuthModule } from './auth.module';
       envFilePath: 'envs/.backend.env', //path to env
     }),
     MongooseModule.forRootAsync({//Mongoose connection module
-      imports: [ConfigModule], 
+      imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getMongoConfig, // config function
     }),
@@ -24,9 +25,10 @@ import { AuthModule } from './auth.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
       //playground: false,
-      
+
     }),
-    AuthModule
+    AuthModule,
+    
   ],
 })
 export class AppModule {}

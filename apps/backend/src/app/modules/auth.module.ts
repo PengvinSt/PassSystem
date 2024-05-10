@@ -9,28 +9,24 @@ import { UserModule } from './user.module';
 import { JwtStrategy } from '../utilities/jwt.strategy';
 import { AuthService } from '../services/auth.service';
 import { AuthResolver } from '../resolver/auth.resolver';
+import { VerifyModule } from './verify.module';
 
 @Module({
   imports: [
     UserModule,
-    PassportModule.register({ 
+    VerifyModule,
+    PassportModule.register({
       defaultStrategy: 'jwt',
-      property: 'user',
-      session: false,
     }),
-    JwtModule.registerAsync({
-      useFactory: (config: ConfigService) => {
-        return {
-          secret: config.get<string>('JWT_KEY'),
-          signOptions: {
-            expiresIn: config.get<string>('EXPIRESIN'),
-          },
-        };
+    JwtModule.register({
+      secretOrPrivateKey: 'secretKey',
+      signOptions: {
+        expiresIn: 3600,
       },
-      inject: [ConfigService],
-    }),
+    })
   ],
-  providers: [AuthService, JwtStrategy,AuthResolver],
+
+  providers: [AuthService, JwtStrategy, AuthResolver],
   exports: [PassportModule, JwtModule],
 })
 export class AuthModule {}

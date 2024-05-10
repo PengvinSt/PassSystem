@@ -10,7 +10,7 @@ export type UserDocument = UserModel & Document;
 @ObjectType()
 @Schema({ collection: 'users', timestamps: true })
 export class UserModel implements IUser {
-    
+
     @Field()
     @Prop({  type : Object, required: true })
     name: NameObjectType
@@ -20,14 +20,18 @@ export class UserModel implements IUser {
     role : string
 
     @Field()
+    @Prop({ required: true })
+    isOnline: boolean
+
+    @Field()
     @Prop({  unique:true, required: true })
     uuid : string
     @Field()
-    @Prop({ required: true }) 
+    @Prop({ required: true })
     gender: string;
 
     @Field()
-    @Prop({ required: true }) 
+    @Prop({ required: true })
     email: string;
 
     @Field()
